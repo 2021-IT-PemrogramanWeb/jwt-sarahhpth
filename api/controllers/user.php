@@ -25,6 +25,7 @@ class User
             $this->throwError(404, "Function $func not found.");
         }
     }
+    //untuk dapetin token
     private function login($data)
     {
         if (!empty($data['name']) && !empty($data['password'])) {
@@ -71,6 +72,7 @@ class User
         echo json_encode($jwt);
         exit;
     }
+    //decode, bakalan dipanggil di function2 lainnya
     private function decodeToken($token)
     {
         try {
@@ -167,7 +169,7 @@ class User
                     $this->throwError(400, "Username or password or role is blank.");
                 }
             } else {
-                $this->throwError(403, 'Only admin can access.');
+                $this->throwError(403, 'User cannot create another user');
             }
         } else {
             $this->throwError(400, 'Token not inserted.');
@@ -256,6 +258,7 @@ class User
         echo json_encode($message);
         exit;
     }
+    //succcessfully getting request
     public function response($data)
     {
         http_response_code(200);
